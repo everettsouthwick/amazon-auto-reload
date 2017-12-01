@@ -1,3 +1,9 @@
 # amazon-auto-reload
 
-Automatically reload Amazon.com gift card balance in $0.50 increments to maximize credit or debit card rewards. (i.e. 5% interest after 15 transactions in a month).
+Automate reloading your Amazon.com gift card balance in $0.50 to maximize credit card rewards.
+
+# Requirements
+
+- Selenium and chromedriver.
+
+- Define environment variables for `AMAZON_USERNAME`, `AMAZON_PASSWORD`, `CARD_NUMBER`, and `CHROME_DRIVER`.
