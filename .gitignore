@@ -1,4 +1,5 @@
 __pycache__/
 *.log
 globals.py
+globals.pyc
 chromedriver.exe
