@@ -18,16 +18,16 @@ def login(username, password, driver, wait):
     wait.until(EC.title_is("Reload Your Balance"))
 
 def reload(card_number, last_four, reload_amount, driver, wait):
+    # Check to see if we need to change the page.
     if EC.title_is("Amazon Sign In"):
         print("User is not signed in. Reloading failed!")
         quit()
-
     if EC.title_is("Thank you for reloading your balance"):
         driver.get("https://smile.amazon.com/asv/reload/")
-
+    
+    # Select the correct credit card and verify it.
     driver.find_element_by_xpath("//*[contains(text(), 'ending in {}')]".format(last_four)).click()
     time.sleep(1)
-
     try:
         driver.find_element_by_xpath("//input[@placeholder='ending in {}']".format(last_four)).send_keys(card_number)
         time.sleep(1)
@@ -41,6 +41,7 @@ def reload(card_number, last_four, reload_amount, driver, wait):
     except NoSuchElementException:
         pass
 
+    # Reload for the specified amount.
     driver.find_element_by_id('asv-manual-reload-amount').clear()
     driver.find_element_by_id('asv-manual-reload-amount').send_keys('%.2f' % reload_amount)
     time.sleep(1)
