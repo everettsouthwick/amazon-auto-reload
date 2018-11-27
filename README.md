@@ -1,26 +1,35 @@
 # amazon-auto-reload
 
-This python script will automate reloading Amazon.com gift cards in custom increments to maximize credit and debit card rewards with minimal purchase requirements.
+This python scripts automates the process of reloading Amazon.com gift cards with user-defined amounts and user-defined transactions per execution. This is useful to maximize credit and debit card rewards or to prevent the closure of a credit account due to inactivity.
 
 ## Dependencies
 
 - Python 2.7 or newer.
-- Selenium, which can be installed by typing `pip install -U selenium` into your command line.
-- Chromedriver, which can be found here: https://sites.google.com/a/chromium.org/chromedriver/
+- Selenium
+- Chromedriver
 
 ## Instructions
 
-- Install Selenium and place chromedriver.exe in the root folder of this project.
-- Modify `config.py` with your Amazon.com credentials, your cards you wish reload, and your chromedriver location.
-```python
-# Define the cards you wish to reload.
-card1 = Card("XXXXXXXXXXXX5555", 0.50, 1) # This card will be reloaded for $0.50, one time.
-card2 = Card("XXXXXXXXXXXX1234", 1.25, 3) # This card will be reloaded for $1.25, three times.
-
-# Other variables
-username = "amazon_user" # Your Amazon username.
-password = "amazon_pass" # Your Amazon password.
-cards = [card1, card2] # The Card objects in this array will be reloaded as defined above.
-chromedriver = "{}\\chromedriver.exe".format(os.getcwd()) # The file path to your chromedriver. By default, it will look in your current working directory for a file named chromedriver.exe.
+1. Install Selenium by typing `pip install -U selenium` into your command line.
+2. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) and place into the root directory (where `run.py` is).
+3. Modify `config.json` with your Amazon credentials and the cards you wish to reload.
+```json
+{
+    "username": "amazon_username",
+    "password": "amazon_password",
+    "cards": [
+        { 
+            "cardNumber": "XXXXXXXXXXXX5555",
+            "reloadAmount": 0.50,
+            "reloadTimes": 1
+        },
+        {
+            "cardNumber": "XXXXXXXXXXXX1234", 
+            "reloadAmount": 1.25, 
+            "reloadTimes": 3
+        }
+    ],
+    "reloadDelay": 300
+}
 ```
-- Run bot.py.
+4. Run `bot.py`.
