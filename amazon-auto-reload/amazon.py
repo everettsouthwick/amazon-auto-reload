@@ -18,8 +18,7 @@ def login(username, password, driver, wait):
     wait.until(EC.title_is("Reload Your Balance"))
 
 def reload(card_number, last_four, reload_amount, driver, wait):
-    if EC.title_is("Thank you for reloading your balance"):
-        driver.get("https://smile.amazon.com/asv/reload/")
+    driver.get("https://smile.amazon.com/asv/reload/")
     
     # Select the correct credit card and verify it.
     driver.find_element_by_xpath("//*[contains(text(), 'ending in {}')]".format(last_four)).click()
