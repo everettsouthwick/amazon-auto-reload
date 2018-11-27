@@ -32,4 +32,4 @@ This python scripts automates the process of reloading Amazon.com gift cards wit
     "reloadDelay": 300
 }
 ```
-4. Run `bot.py`.
+4. Execute `run.py`.
