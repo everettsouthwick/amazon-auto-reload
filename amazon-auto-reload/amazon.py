@@ -18,10 +18,6 @@ def login(username, password, driver, wait):
     wait.until(EC.title_is("Reload Your Balance"))
 
 def reload(card_number, last_four, reload_amount, driver, wait):
-    # Check to see if we need to change the page.
-    if EC.title_is("Amazon Sign In"):
-        print("User is not signed in. Reloading failed!")
-        quit()
     if EC.title_is("Thank you for reloading your balance"):
         driver.get("https://smile.amazon.com/asv/reload/")
     
@@ -36,7 +32,7 @@ def reload(card_number, last_four, reload_amount, driver, wait):
             try:
                 button.click()
                 break
-            except NoSuchElementException:
+            except:
                 pass
     except NoSuchElementException:
         pass
