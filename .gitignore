@@ -2,3 +2,4 @@ __pycache__/
 *.log
 *.pyc
 chromedriver.exe
+config.json
