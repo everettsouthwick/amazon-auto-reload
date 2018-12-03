@@ -1,6 +1,6 @@
 # amazon-auto-reload
 
-This python scripts automates the process of reloading Amazon.com gift cards with user-defined amounts and user-defined transactions per execution. This is useful to maximize credit and debit card rewards or to prevent the closure of a credit account due to inactivity.
+This script automates the process of reloading Amazon gift cards with configurable amounts and transactions per execution. This is useful to maximize credit and/or debit card rewards or to prevent the closure of a credit account due to inactivity.
 
 ## Dependencies
 
@@ -12,7 +12,7 @@ This python scripts automates the process of reloading Amazon.com gift cards wit
 
 1. Install Selenium by typing `pip install -U selenium` into your command line
 2. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) and place into the root directory (where `run.py` is)
-3. Create or modify `config.json` in the root directory with your Amazon credentials and the cards you wish to reload
+3. Create and/or modify `config.json` in the root directory with your Amazon credentials and the cards you wish to reload
 ```json
 {
     "username": "amazon_username",
