@@ -14,7 +14,6 @@ with open('config.json') as properties:
     cards = []
     for card in data["cards"]:
         if card["enabled"]:
-            print("{} enabled".format(card["cardNumber"]))
             newCard = Card(card["cardNumber"], card["reloadAmount"], card["reloadTimes"])
             cards.append(newCard)
 
@@ -25,7 +24,7 @@ login(username, password, driver, wait)
 for card in cards:
     last_four = card.card_number[-4:]
     while card.reload_times > 0:
-        print("Reloading card ending in {} with ${}.".format(last_four, card.reload_amount))
+        print("Reloading card ending in {} with ${}.".format(last_four, '%.2f' % card.reload_amount))
         reload_card(card.card_number, last_four, card.reload_amount, driver, wait)
         card.reload_times -= 1
         if card.reload_times > 0:
