@@ -6,7 +6,7 @@ from amazon import *
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
-with open('config.json') as properties:
+with open("{}\\config.json".format(os.path.dirname(os.path.realpath(sys.argv[0])))) as properties:
     data = json.load(properties)
     username = data["username"]
     password = data["password"]
