@@ -2,7 +2,7 @@ import json
 import os
 import sys
 import time
-from amazon import *
+import amazon
 from selenium import webdriver
 from selenium.webdriver.support.ui import WebDriverWait
 
@@ -14,18 +14,18 @@ with open("{}\\config.json".format(os.path.dirname(os.path.realpath(sys.argv[0])
     cards = []
     for card in data["cards"]:
         if card["enabled"]:
-            newCard = Card(card["cardNumber"], card["reloadAmount"], card["reloadTimes"])
+            newCard = amazon.Card(card["cardNumber"], card["reloadAmount"], card["reloadTimes"])
             cards.append(newCard)
 
 driver = webdriver.Chrome("{}\\chromedriver.exe".format(os.path.dirname(os.path.realpath(sys.argv[0]))))
 wait = WebDriverWait(driver, 30)
-login(username, password, driver, wait)
+amazon.login(username, password, driver, wait)
     
 for card in cards:
     last_four = card.card_number[-4:]
     while card.reload_times > 0:
         print("Reloading card ending in {} with ${}.".format(last_four, '%.2f' % card.reload_amount))
-        reload_card(card.card_number, last_four, card.reload_amount, driver, wait)
+        amazon.reload_card(card.card_number, last_four, card.reload_amount, driver, wait)
         card.reload_times -= 1
         if card.reload_times > 0:
             print("Pausing for {} seconds.".format(delay))
