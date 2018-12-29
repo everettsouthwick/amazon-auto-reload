@@ -46,6 +46,7 @@ def reload_card(card_number, last_four, reload_amount, driver):
     driver.find_element_by_id('asv-manual-reload-amount').clear()
     driver.find_element_by_id('asv-manual-reload-amount').send_keys('%.2f' % reload_amount)
     driver.execute_script('document.querySelector("#asv-manual-reload-amount").blur();') # Blur the reload amount input to ensure the correct value will be reloaded.
+    time.sleep(1)
     driver.find_element_by_xpath("//button[contains(.,'Reload ${}')]".format('%.2f' % reload_amount)).click()
     
     # Try again to verify the credit card.
