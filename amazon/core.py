@@ -6,7 +6,7 @@ from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
 def login(username, password, driver):
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 30)
     driver.get("https://smile.amazon.com/asv/reload/")
     driver.find_element_by_id("form-submit-button").click()
     wait.until(EC.title_is("Amazon Sign In"))
@@ -20,13 +20,13 @@ def login(username, password, driver):
     wait.until(EC.title_is("Reload Your Balance"))
 
 def reload_card(card_number, last_four, reload_amount, driver):
-    wait = WebDriverWait(driver, 15)
+    wait = WebDriverWait(driver, 30)
     driver.get("https://smile.amazon.com/asv/reload/")
     
     # Select the correct credit card and verify it.
     driver.find_element_by_xpath("//*[contains(text(), 'ending in {}')]".format(last_four)).click()
     try:
-        conf_input = WebDriverWait(driver, 5).until(
+        conf_input = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='ending in {}']".format(last_four)))
         )
         conf_input.send_keys(card_number)
@@ -51,7 +51,7 @@ def reload_card(card_number, last_four, reload_amount, driver):
     
     # Try again to verify the credit card.
     try:
-        conf_input = WebDriverWait(driver, 5).until(
+        conf_input = WebDriverWait(driver, 10).until(
             EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='ending in {}']".format(last_four)))
         )
         conf_input.send_keys(card_number)
