@@ -25,22 +25,6 @@ def reload_card(card_number, last_four, reload_amount, driver):
     
     # Select the correct credit card and verify it.
     driver.find_element_by_xpath("//*[contains(text(), 'ending in {}')]".format(last_four)).click()
-    try:
-        conf_input = WebDriverWait(driver, 10).until(
-            EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='ending in {}']".format(last_four)))
-        )
-        conf_input.send_keys(card_number)
-        conf_buttons = driver.find_elements_by_xpath("//button[contains(.,'Confirm Card')]")
-        for button in conf_buttons:
-            try:
-                button.click()
-                break
-            except:
-                pass
-    except TimeoutException:
-        pass
-    except NoSuchElementException:
-        pass
 
     # Reload for the specified amount.
     driver.find_element_by_id('asv-manual-reload-amount').clear()
@@ -51,7 +35,7 @@ def reload_card(card_number, last_four, reload_amount, driver):
     
     # Try again to verify the credit card.
     try:
-        conf_input = WebDriverWait(driver, 10).until(
+        conf_input = WebDriverWait(driver, 20).until(
             EC.visibility_of_element_located((By.XPATH, "//input[@placeholder='ending in {}']".format(last_four)))
         )
         conf_input.send_keys(card_number)
