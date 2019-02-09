@@ -4,7 +4,7 @@ This script automates the process of reloading Amazon gift cards with configurab
 
 ## Dependencies
 
-- Python 2.7 or newer
+- Python >=2.7 or >=3.6
 - Selenium
 - Chromedriver
 
