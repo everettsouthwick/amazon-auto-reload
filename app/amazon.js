@@ -28,6 +28,7 @@ module.exports = class Amazon {
             while (this.cards[i].reloadTimes > 0) {
                 await reloadCard(driver, this.cards[i])
                 this.cards[i].reloadTimes -= 1
+                await sleep(this.reloadDelay)
             }
         }
     }
@@ -73,4 +74,8 @@ async function reloadCard(driver, card) {
     catch (e) {
         return console.error('ERR: Submission button text mismatch.')
     }    
+}
+
+async function sleep (ms) {
+    return new Promise(resolve => setTimeout(resolve, ms))
 }
