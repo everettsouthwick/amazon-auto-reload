@@ -4,7 +4,7 @@ This script automates the process of reloading Amazon gift cards with configurab
 
 ## Dependencies
 
-- Node
+- Node v10.15.3 or newer
 - Selenium
 - Chromedriver
 
