@@ -5,20 +5,6 @@ from selenium.webdriver.support.ui import WebDriverWait
 from selenium.webdriver.support import expected_conditions as EC
 from selenium.common.exceptions import NoSuchElementException, TimeoutException
 
-def login(username, password, driver):
-    wait = WebDriverWait(driver, 30)
-    driver.get("https://smile.amazon.com/asv/reload/")
-    driver.find_element_by_id("form-submit-button").click()
-    wait.until(EC.title_is("Amazon Sign In"))
-    driver.find_element_by_id("ap_email").send_keys(username)
-    try:
-        driver.find_element_by_id("continue").click()
-    except NoSuchElementException:
-        pass      
-    driver.find_element_by_id("ap_password").send_keys(password)
-    driver.find_element_by_id("signInSubmit").click()
-    wait.until(EC.title_is("Reload Your Balance"))
-
 def reload_card(card_number, last_four, reload_amount, driver):
     wait = WebDriverWait(driver, 30)
     driver.get("https://smile.amazon.com/asv/reload/")
