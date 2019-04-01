@@ -74,7 +74,3 @@ async function reloadCard(driver, card) {
         return console.error('ERR: Submission button text mismatch.')
     }    
 }
-
-async function sleep (ms) {
-    return new Promise(resolve => setTimeout(resolve, ms))
-}
