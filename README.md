@@ -4,14 +4,14 @@ This script automates the process of reloading Amazon gift cards with configurab
 
 ## Dependencies
 
-- Python >=2.7 or >=3.6
+- Node
 - Selenium
 - Chromedriver
 
 ## Instructions
 
-1. Install Selenium by typing `pip install -U selenium` into your command line
-2. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) and place into the root directory (where `run.py` is)
+1. Download the required packages by typing `npm install` into your command line in the root directory
+2. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) and place into the root directory
 3. Create and/or modify `config.json` in the root directory with your Amazon credentials and the cards you wish to reload
 ```json
 {
@@ -34,4 +34,8 @@ This script automates the process of reloading Amazon gift cards with configurab
     "reloadDelay": 300
 }
 ```
-4. Execute `run.py`
+4. Execute `index.js`
+
+## TODO
+
+- Create a scheduler of some kind
