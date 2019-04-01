@@ -62,3 +62,6 @@ typings/
 
 # Exclude chromedriver
 cromedriver*
+
+# Exclude config.json
+config.json
