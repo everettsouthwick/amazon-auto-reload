@@ -61,7 +61,7 @@ typings/
 .next
 
 # Exclude chromedriver
-cromedriver*
+chromedriver*
 
 # Exclude config.json
 config.json
