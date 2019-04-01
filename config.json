@@ -1,0 +1,19 @@
+{
+    "username": "amazon_username",
+    "password": "amazon_password",
+    "cards": [
+        { 
+            "cardNumber": "XXXXXXXXXXXX5555", 
+            "reloadAmount": 0.50,
+            "reloadTimes": 1,
+            "enabled": false
+        },
+        {
+            "cardNumber": "XXXXXXXXXXXX1234", 
+            "reloadAmount": 1.25,
+            "reloadTimes": 3,
+            "enabled": true
+        }
+    ],
+    "reloadDelay": 300
+}
