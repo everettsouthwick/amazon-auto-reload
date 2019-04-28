@@ -1,23 +1,40 @@
 {
   "name": "amazon-auto-reload",
-  "version": "1.0.0",
-  "description": "Buys Amazon.com gift cards of a specified amount for a list of credit/debit cards.",
+  "version": "1.1.0",
+  "description": "Makes purchases for specified amounts for a list of credit/debit cards.",
   "main": "index.js",
   "dependencies": {
-    "selenium-webdriver": "^4.0.0-alpha.1"
+    "geckodriver": "latest",
+    "selenium-webdriver": "latest",
+    "winston": "latest"
   },
-  "devDependencies": {},
+  "devDependencies": {
+    "flow-bin": "latest",
+    "xo": "latest"
+  },
+  "author": "Everett Southwick",
+  "license": "GPL-3.0",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
+  "xo": {
+    "brace-style": "allman"
+  },
+  "keywords": [
+    "Amazon",
+    "credit cards",
+    "credit-card",
+    "debit-card",
+    "gift-card",
+    "gift-card-balance",
+    "selenium"
+  ],
+  "homepage": "https://github.com/everettsouthwick/amazon-auto-reload#readme",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/everettsouthwick/amazon-auto-reload.git"
   },
-  "author": "Everett Southwick",
-  "license": "GPL-3.0",
   "bugs": {
     "url": "https://github.com/everettsouthwick/amazon-auto-reload/issues"
-  },
-  "homepage": "https://github.com/everettsouthwick/amazon-auto-reload#readme"
+  }
 }
