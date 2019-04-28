@@ -65,3 +65,6 @@ chromedriver*
 
 # Exclude config.json
 config.json
+
+# Exclude draft commit message
+commitmessage.txt

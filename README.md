@@ -10,36 +10,43 @@ This app has been rewritten using Node. To find the original python version, see
 
 - Node v10.15.3 or newer
 - Selenium
-- Chromedriver
+- [geckodriver](https://www.npmjs.com/package/geckodriver)
 
 ## Instructions
 
 1. Download the required packages by typing `npm install` into your command line in the root directory
-2. Download [Chromedriver](https://sites.google.com/a/chromium.org/chromedriver/) and place into the root directory
-3. Create and/or modify `config.json` in the root directory with your Amazon credentials and the cards you wish to reload
+2. Create and/or modify `config.json` in the root directory with your Amazon credentials and the cards you wish to reload
 ```json
 {
-    "username": "amazon_username",
-    "password": "amazon_password",
+    "amazon": {
+        "username": "example@example.com",
+        "password": "myPassword",
+        "reloadDelay": 300
+        },
     "cards": [
-        { 
-            "cardNumber": "XXXXXXXXXXXX5555", 
-            "reloadAmount": 0.50,
+        {
+            "description": "Acme Bank Gold Card",
+            "cardNumber": "4111111111111111",
+            "reloadAmount": 10.00,
+            "expirationMonth": 0,
+            "expirationYear": 0,
             "reloadTimes": 1,
-            "enabled": false
+            "enabled": true
         },
         {
-            "cardNumber": "XXXXXXXXXXXX1234", 
-            "reloadAmount": 1.25,
-            "reloadTimes": 3,
+            "description": "Acme Bank Platinum Card",
+            "cardNumber": "5500000000000004",
+            "reloadAmount": 10.00,
+            "expirationMonth": 12,
+            "expirationYear": 2024,
+            "reloadTimes": 1,
             "enabled": true
         }
-    ],
-    "reloadDelay": 300
+    ]
 }
 ```
-4. Execute `index.js`
+3. Execute `index.js`
 
 ## TODO
 
-- Create a scheduler of some kind
+- Create a scheduler of some kind 
