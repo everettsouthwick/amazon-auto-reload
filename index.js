@@ -1,21 +1,43 @@
-const { Builder } = require('selenium-webdriver')
-const selenium = require('selenium-webdriver')
-const config = require('./config.json')
-const Amazon = require('./app/amazon')
+'use strict';
+
+const config = require('./config.json');
+const Card = require('./app/models/card');
+const logger = require('./utils/logger');
 
 async function start() {
-    let capabilities = selenium.Capabilities.chrome()
-    var options = {
-      'args': ['--disable-notifications']
-    }
-    capabilities.set('chromeOptions', options)
-    const driver = new Builder().forBrowser('chrome').withCapabilities(capabilities).build()
-    let amazon = new Amazon(config)
+	logger.debug('We just started!');
 
-    await amazon.login(driver)
-    await amazon.reload(driver)
+	const cards = loadCards(config.cards);
 
-    driver.quit()
+	for (const card of cards) {
+		if (!card.skip) {
+			logger.debug(`I'm planning/working to make a purchase using ${card.description} ending in ${card.lastFour}.`);
+		}
+	}
+
+	await amazonReload(cards);
 }
 
-start()
+function loadCards(cardConfig) {
+	const cardArray = [];
+
+	cardConfig.forEach(card => {
+		cardArray.push(new Card(card));
+	});
+
+	return cardArray;
+}
+
+async function amazonReload(cards) {
+	if (arguments.length !== 1) {
+		throw new Error('incorrect number of parameters to amazonReload');
+	}
+
+	const Amazon = require('./app/amazon');
+
+	const amazon = new Amazon(config.amazon);
+
+	await amazon.reloadCards(cards);
+}
+
+start();

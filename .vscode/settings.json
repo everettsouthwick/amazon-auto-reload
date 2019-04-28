@@ -1,0 +1,6 @@
+{
+    "xo.enable": true,
+    "xo.options": {
+        "brace-style": "allman"
+    }
+}
