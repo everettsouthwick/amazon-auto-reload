@@ -4,6 +4,7 @@
   "description": "Makes purchases for specified amounts for a list of credit/debit cards.",
   "main": "index.js",
   "dependencies": {
+    "chromedriver": "latest",
     "geckodriver": "latest",
     "selenium-webdriver": "latest",
     "winston": "latest"
