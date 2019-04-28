@@ -2,7 +2,8 @@
     "amazon": {
         "username": "example@example.com",
         "password": "myPassword",
-        "reloadDelay": 300
+        "reloadDelay": 300,
+        "browser": "chrome"
         },
     "cards": [
         {

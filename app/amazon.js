@@ -1,8 +1,9 @@
 'use strict';
 
 // We need to require the instance of the webdriver for selenium-webdriver to load the npm-installed instance of the webdriver
+require('chromedriver');
 require('geckodriver'); // eslint-disable-line import/no-unassigned-import
-const webdriver = require('selenium-webdriver');
+const webdriver = require ('selenium-webdriver');
 const {By, until} = require('selenium-webdriver');
 
 class Amazon {
@@ -10,6 +11,7 @@ class Amazon {
 		this.username = amazon.username;
 		this.password = amazon.password;
 		this.reloadDelay = amazon.reloadDelay;
+		this.browser = amazon.browser;
 	}
 
 	async reloadCards(cards) {
@@ -17,7 +19,7 @@ class Amazon {
 			throw new Error('Incorrect number of parameters');
 		}
 
-		const driver = new webdriver.Builder().forBrowser('firefox').build();
+		const driver = new webdriver.Builder().forBrowser(this.browser).build();
 
 		await driver.get('https://smile.amazon.com/asv/reload/');
 		await driver.findElement(By.id('form-submit-button')).click();
@@ -63,11 +65,14 @@ class Amazon {
 		await confirmation.sendKeys(card.cardNumber);
 
 		const confirmationButtons = await driver.findElements(By.xpath('//button[contains(.,\'Confirm Card\')]'));
-		for (const confirmationButton in confirmationButtons) {
-			if (await confirmationButton.isDisplayed()) { // eslint-disable-line no-await-in-loop
-				await confirmationButton.click(); // eslint-disable-line no-await-in-loop
+		for (let i = 0; i < confirmationButtons.length; i++) {
+			if (await confirmationButtons[i].isDisplayed()) {
+				await confirmationButtons[i].click();
 			}
 		}
+
+		// Manual wait time to allow for the confirmation to finish.
+		await sleep(5000);
 
 		try {
 			await driver.wait(until.elementTextIs(submitButton, `Reload $${card.reloadAmount.toFixed(2)}`), 10000);
