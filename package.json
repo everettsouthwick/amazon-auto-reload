@@ -1,25 +1,30 @@
 {
   "name": "amazon-auto-reload",
-  "version": "1.1.0",
+  "version": "2.0.0",
   "description": "Makes purchases for specified amounts for a list of credit/debit cards.",
-  "main": "index.js",
+  "main": "dist/index.js",
   "dependencies": {
+    "@types/chromedriver": "^2.38.0",
+    "@types/selenium-webdriver": "^4.0.0",
     "chromedriver": "latest",
     "geckodriver": "latest",
-    "selenium-webdriver": "latest",
-    "winston": "latest"
+    "selenium-webdriver": "3.6",
+    "typescript": "3.4",
+    "winston": "3.2"
   },
   "devDependencies": {
-    "flow-bin": "latest",
-    "xo": "latest"
+    "tslint": "^5.16.0",
+    "tslint-eslint-rules": "^5.4.0"
   },
   "author": "Everett Southwick",
   "license": "GPL-3.0",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
-  },
-  "xo": {
-    "brace-style": "allman"
+    "build": "npm run test && npm run build-ts",
+    "build-ts": "tsc",
+    "install-and-build": "npm install --production && npm run build-ts",
+    "lint": "tslint 'src/**/*.ts'",
+    "start": "node dist/index.js",
+    "test": "npm run lint"
   },
   "keywords": [
     "Amazon",

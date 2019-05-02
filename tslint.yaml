@@ -1,0 +1,10 @@
+---
+extends: "tslint:recommended"
+rulesDirectory:
+    - node_modules/tslint-eslint-rules/dist/rules/
+rules:
+    indent: [true, "tabs"]
+    no-constant-condition: true # Added per tslint-eslint instructions
+    brace-style: [ true, "allman"]
+    one-line: [false, "check-opening-brace"]  
+...
