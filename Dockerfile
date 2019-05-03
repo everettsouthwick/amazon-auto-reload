@@ -16,6 +16,9 @@ RUN apt-get update \
         && apt-get install -y \
                 npm
 
+# Cleanup from apt-get
+RUN rm -rf /var/lib/apt/lists/*
+
 WORKDIR $APPDIR
 
 COPY package*.json ./
@@ -26,9 +29,9 @@ RUN npm install --production
 
 COPY src ./src/
 COPY tsconfig.json ./
-COPY config.json ./
+COPY config/default.json ./config/
 
 # Compile our TypeScript source code files
-RUN npm run build-ts
+RUN npm run tsc
 
 CMD ["npm", "start"]

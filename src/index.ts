@@ -1,3 +1,5 @@
+import config from "config";
+
 import { Amazon, IAmazonConfig } from "./amazon";
 import { Card } from "./card";
 import { logger } from "./logger";
@@ -8,13 +10,10 @@ async function start(): Promise<void>
 {
 	logger.debug("App started");
 
-	const configFileName: string = process.argv.length > 2 ? process.argv[2] : "../config.json";
-	const config = require(configFileName);
+	const cards: Card[] = loadCards(config.get("cards"));
 
-	const cards: Card[] = loadCards(config.cards);
-
-	const completePurchases: boolean =
-		typeof config.completePurchases === "undefined" ? true : config.completePurchases;
+	const completeTransactions: boolean =
+		config.has("completeTransactions") ? config.get("completeTransactions") : true;
 
 	// Await discoverCheckCards(cards, config.discoverPersonal);
 	//
@@ -30,9 +29,12 @@ async function start(): Promise<void>
 
 	// await optimumReload(cards);
 
-	await amazonReload(config.amazon, cards, completePurchases);
+	// const mango: Mango = new Mango(config.get("mango"), completeTransactions);
+	// mango.transferFunds();
 
-	logger.debug("App finished");
+	await amazonReload(config.get("amazon"), cards, completeTransactions);
+
+	logger.debug("All requests submitted");
 }
 
 function loadCards(cardConfig: Card[]): Card[]
@@ -47,9 +49,9 @@ function loadCards(cardConfig: Card[]): Card[]
 	return cardArray;
 }
 
-async function amazonReload(amazonConfig: IAmazonConfig, cards: Card[], completePurchases: boolean): Promise<void>
+async function amazonReload(amazonConfig: IAmazonConfig, cards: Card[], completeTransactions: boolean): Promise<void>
 {
-	const amazon: Amazon = new Amazon(amazonConfig, completePurchases);
+	const amazon: Amazon = new Amazon(amazonConfig, completeTransactions);
 
 	await amazon.reloadCards(cards);
 }

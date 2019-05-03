@@ -3,22 +3,23 @@
     "amazon": {
         "username": "example@example.com",
         "password": "myPassword",
-        "reloadDelay": 13,
+        "reloadDelayInSeconds": 30,
         "browserType": "chrome"
         },
     "cards": [
         {
             "description": "Acme Bank Gold Card",
             "cardNumber": "4111111111111111",
-            "reloadTimes": 1,
-            "enabled": false
+            "reloadAmount": 10.00,
+            "enabled": false,
+            "reloadTimes": 1
         },
         {
             "description": "Acme Bank Platinum Card",
             "cardNumber": "5500000000000004",
             "reloadAmount": 10.00,
-            "reloadTimes": 1,
-            "enabled": true
+            "enabled": true,
+            "reloadTimes": 1
         }
     ]
 }

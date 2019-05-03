@@ -66,5 +66,5 @@ id_rsa
 # Compiled TypeScript files
 dist/
 
-# config.json
-config.json
+# App configuration file
+default.json
