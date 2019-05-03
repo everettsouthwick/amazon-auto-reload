@@ -41,7 +41,7 @@ In the application's directory:
 
 ## TODO
 
-- Consider utilizing something like http://admc.io/wd/ or http://www.nightmarejs.org/
+- Consider utilizing something like http://admc.io/wd/
 - Implement software testing
 - Create a scheduler of some kind 
 

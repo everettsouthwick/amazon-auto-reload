@@ -1,6 +1,3 @@
 {
-    "xo.enable": true,
-    "xo.options": {
-        "brace-style": "allman"
-    }
+    "tslint.configFile": "./tslint/tslint.yaml"
 }

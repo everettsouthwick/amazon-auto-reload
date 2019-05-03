@@ -6,10 +6,12 @@ FROM selenium/node-chrome-debug
 
 ENV APPDIR make-purchases
 
+# Needed for specific apt-get install package(s)
+USER root
+
 # selenium/node-* image does not contain
 #       npm
 # (Verified 2019-05-01)
-USER root
 RUN apt-get update \
         && apt-get install -y \
                 npm
@@ -17,12 +19,16 @@ RUN apt-get update \
 WORKDIR $APPDIR
 
 COPY package*.json ./
+
+# Install node dependencies
+# (will be cached unless package file is modified)
+RUN npm install --production
+
 COPY src ./src/
 COPY tsconfig.json ./
 COPY config.json ./
 
-# Install node dependencies and compile our TypeScript
-RUN npm install --production \
-        && npm run build-ts
+# Compile our TypeScript source code files
+RUN npm run build-ts
 
 CMD ["npm", "start"]

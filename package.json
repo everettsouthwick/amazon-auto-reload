@@ -20,9 +20,14 @@
   "license": "GPL-3.0",
   "scripts": {
     "build": "npm run test && npm run build-ts",
-    "build-ts": "tsc",
+    "build-ts": "tsc --project tsconfig.json",
     "install-and-build": "npm install --production && npm run build-ts",
-    "lint": "tslint 'src/**/*.ts'",
+    "lint": "tslint 'src/**/*.ts' --config tslint/tslint.yaml",
+    "lint-fix": "tslint 'src/**/*.ts' --config tslint/tslint.yaml --fix",
+    "lint-most": "tslint 'src/**/*.ts' --config tslint/tslint-most.yaml",
+    "lint-most-fix": "tslint 'src/**/*.ts' --config tslint/tslint-most.yaml --fix",
+    "lint-sort": "tslint 'src/**/*.ts' --config tslint/tslint-sort.yaml",
+    "lint-sort-fix": "tslint 'src/**/*.ts' --config tslint/tslint-sort.yaml --fix",
     "start": "node dist/index.js",
     "test": "npm run lint"
   },

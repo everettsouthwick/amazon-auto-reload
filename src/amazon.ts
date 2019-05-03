@@ -7,7 +7,7 @@ import { ISiteConfig, Site } from "./site";
 
 export interface IAmazonConfig extends ISiteConfig
 {
-	readonly reloadDelayInSeconds?: number;
+  readonly reloadDelayInSeconds?: number;
 }
 
 export class Amazon extends Site implements IAmazonConfig
@@ -20,9 +20,40 @@ export class Amazon extends Site implements IAmazonConfig
 		super(amazonConfig);
 
 		this.completePurchases = completePurchases;
+		logger.info(`Complete purchases is set to ${this.completePurchases}.`);
 
 		this.reloadDelayInSeconds =
 			typeof amazonConfig.reloadDelayInSeconds === "undefined" ? 300 : amazonConfig.reloadDelayInSeconds;
+	}
+
+	public async reloadCards(cards: Card[]): Promise<void>
+	{
+		const loginURL: URL = new URL("https://smile.amazon.com/asv/reload/");
+		logger.debug(`About to load ${loginURL}`);
+		await this.browser.driver.get(loginURL.href);
+		logger.debug(`Made call to load ${loginURL}`);
+
+		await this.browser.driver.findElement(By.id("form-submit-button"))
+			.click();
+		await this.browser.driver.wait(until.titleIs("Amazon Sign In"));
+		await this.browser.driver.findElement(By.id("ap_email"))
+			.sendKeys(this.username);
+		await this.browser.driver.findElement(By.id("ap_password"))
+			.sendKeys(this.password);
+		await this.browser.driver.findElement(By.id("signInSubmit"))
+			.click();
+		await this.browser.driver.wait(until.titleIs("Reload Your Balance"));
+
+		for (const card of cards)
+		{
+			if (card.enabled)
+			{
+				while (card.reloadTimes-- > 0)
+				{
+					await this.reloadCard(card);
+				}
+			}
+		}
 	}
 
 	public async reloadCard(card: Card): Promise<void>
@@ -89,36 +120,6 @@ export class Amazon extends Site implements IAmazonConfig
 		}
 
 		await sleep(this.reloadDelayInSeconds);
-	}
-
-	public async reloadCards(cards: Card[]): Promise<void>
-	{
-		const loginURL: URL = new URL("https://smile.amazon.com/asv/reload/");
-		logger.debug(`About to load ${loginURL}`);
-		await this.browser.driver.get(loginURL.href);
-		logger.debug(`Made call to load ${loginURL}`);
-
-		await this.browser.driver.findElement(By.id("form-submit-button"))
-			.click();
-		await this.browser.driver.wait(until.titleIs("Amazon Sign In"));
-		await this.browser.driver.findElement(By.id("ap_email"))
-			.sendKeys(this.username);
-		await this.browser.driver.findElement(By.id("ap_password"))
-			.sendKeys(this.password);
-		await this.browser.driver.findElement(By.id("signInSubmit"))
-			.click();
-		await this.browser.driver.wait(until.titleIs("Reload Your Balance"));
-
-		for (const card of cards)
-		{
-			if (card.enabled)
-			{
-				while (card.reloadTimes-- > 0)
-				{
-					await this.reloadCard(card);
-				}
-			}
-		}
 	}
 }
 

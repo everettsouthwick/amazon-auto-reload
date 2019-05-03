@@ -1,7 +1,7 @@
-// Import {Discover, DiscoverConfig} from './sites/discover';
 import { Amazon, IAmazonConfig } from "./amazon";
 import { Card } from "./card";
 import { logger } from "./logger";
+// Import { Discover, DiscoverConfig } from './discover';
 // import { Optimum } from "./optimum";
 
 async function start(): Promise<void>
@@ -47,6 +47,13 @@ function loadCards(cardConfig: Card[]): Card[]
 	return cardArray;
 }
 
+async function amazonReload(amazonConfig: IAmazonConfig, cards: Card[], completePurchases: boolean): Promise<void>
+{
+	const amazon: Amazon = new Amazon(amazonConfig, completePurchases);
+
+	await amazon.reloadCards(cards);
+}
+
 // Async function discoverCheckCards(cards: Card[], login: DiscoverConfig)
 // {
 // 	const discover = new Discover(login);
@@ -59,12 +66,5 @@ function loadCards(cardConfig: Card[]): Card[]
 
 // 	await optimum.makePurchases(cards);
 // }
-
-async function amazonReload(amazonConfig: IAmazonConfig, cards: Card[], completePurchases: boolean): Promise<void>
-{
-	const amazon: Amazon = new Amazon(amazonConfig, completePurchases);
-
-	await amazon.reloadCards(cards);
-}
 
 start();
