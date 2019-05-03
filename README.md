@@ -53,7 +53,7 @@ In the application's directory:
 
 ## Rewrite history
 
-A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](tree/deprecated-python). The Python version will not receive further updates or support.
+A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version will not receive further updates or support.
 
 ## Acknowledgements
 
