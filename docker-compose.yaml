@@ -1,0 +1,8 @@
+version: '3.7'
+services:
+  app:
+    build: .
+    command: 'npm run start'
+    volumes:
+      - /root/.npm
+      - /home/node/.npm

@@ -20,7 +20,7 @@ coverage
 # nyc test coverage
 .nyc_output
 
-# Grunt intermediate storage (http://gruntjs.com/creating-plugins#storing-task-files)
+# Grunt intermediate storage (https://gruntjs.com/creating-plugins#storing-task-files)
 .grunt
 
 # Bower dependency directory (https://bower.io/)
@@ -60,11 +60,11 @@ typings/
 # next.js build output
 .next
 
-# Exclude chromedriver
-chromedriver*
+# ssh private keys
+id_rsa
 
-# Exclude config.json
-config.json
+# Compiled TypeScript files
+dist/
 
-# Exclude draft commit message
-commitmessage.txt
+# App configuration file
+default.json

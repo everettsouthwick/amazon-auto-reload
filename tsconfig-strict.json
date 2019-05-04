@@ -16,6 +16,7 @@
         "noUnusedParameters": true,
         "strictBindCallApply": true,
         "strictFunctionTypes": true,
+        "strict": true,
         "target": "ES2017"
     }
 }

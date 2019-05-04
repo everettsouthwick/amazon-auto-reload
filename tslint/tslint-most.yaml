@@ -1,0 +1,5 @@
+extends:
+  - 'tslint:all'
+  - ./tslint-app-rules.yaml
+rules:
+  completed-docs: false

@@ -1,0 +1,17 @@
+rulesDirectory:
+  - ../node_modules/tslint-eslint-rules/dist/rules/
+rules:
+  brace-style:
+    - allman
+  indent:
+    - tabs
+  member-ordering:
+    -
+      alphabetize: false
+      order: statics-first
+  no-constant-condition: true
+  one-line:
+    - check-catch
+    - check-else
+    - check-finally
+    - check-whitespace

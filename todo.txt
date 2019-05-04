@@ -1,0 +1,2 @@
+Modify the app to take advantage of the benefits ofhttps://www.npmjs.com/package/config
+now that the module is in place in the app.

@@ -1,28 +1,25 @@
 {
+    "completePurchases": true,
     "amazon": {
         "username": "example@example.com",
         "password": "myPassword",
-        "reloadDelay": 300,
-        "browser": "chrome"
+        "reloadDelayInSeconds": 30,
+        "browserType": "chrome"
         },
     "cards": [
         {
             "description": "Acme Bank Gold Card",
             "cardNumber": "4111111111111111",
             "reloadAmount": 10.00,
-            "expirationMonth": 0,
-            "expirationYear": 0,
-            "reloadTimes": 1,
-            "enabled": true
+            "enabled": false,
+            "reloadTimes": 1
         },
         {
             "description": "Acme Bank Platinum Card",
             "cardNumber": "5500000000000004",
             "reloadAmount": 10.00,
-            "expirationMonth": 12,
-            "expirationYear": 2024,
-            "reloadTimes": 1,
-            "enabled": true
+            "enabled": true,
+            "reloadTimes": 1
         }
     ]
 }
