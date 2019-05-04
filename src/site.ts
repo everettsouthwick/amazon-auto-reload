@@ -1,4 +1,5 @@
 import { Browser, BrowserTypes } from "./browser";
+import { logger } from "./logger";
 
 export interface ISiteConfig
 {
@@ -15,12 +16,11 @@ export abstract class Site implements ISiteConfig
 
 	protected readonly browser: Browser;
 
-	public constructor(
-		siteConfig: ISiteConfig,
-	)
+	public constructor(siteConfig: ISiteConfig, startingURL?: URL)
 	{
+		logger.debug("Constructing new Site clss object.");
 		Object.assign(this, siteConfig);
 		this.browserType = siteConfig.browserType || "chrome";
-		this.browser = new Browser(this.browserType);
+		this.browser = new Browser(this.browserType, startingURL);
 	}
 }

@@ -2,6 +2,7 @@
     "compileOnSave": true,
     "compilerOptions": {
         "esModuleInterop": true,
+        "listEmittedFiles": true,
         "module": "CommonJS",
         "moduleResolution": "node",
         "outDir": "dist",

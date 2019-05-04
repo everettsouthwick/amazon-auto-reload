@@ -1,2 +1,2 @@
-Modify the app to take advantage of the benefits ofhttps://www.npmjs.com/package/config
-now that the module is in place in the app.
+Decide if https://www.npmjs.com/package/config (currently in place in the app) is the right configuration loading approach for us.
+If yes, modify the app to more fully take advantage of the benefits of it.

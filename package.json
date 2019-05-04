@@ -1,11 +1,14 @@
 {
-  "name": "amazon-auto-reload",
-  "version": "2.0.0",
-  "description": "Makes purchases for specified amounts for a list of credit/debit cards.",
+  "name": "finance-transact",
+  "version": "2.1.0",
+  "description": "Completes transactions for specified amounts for a list of accounts.",
   "main": "dist/index.js",
   "scripts": {
     "build": "npm run test & npm run tsc",
-    "docker:build": "cross-conf-env docker image build .",
+    "docker:build": "cross-conf-env docker image build . -t $npm_package_name",
+    "docker:run": "cross-conf-env docker run -d -p 5900:5900 -v /dev/shm:/dev/shm --name $npm_package_name $npm_package_name",
+    "docker:forceprune": "npm run docker:stop && cross-conf-env docker container prune --force",
+    "docker:stop": "cross-conf-env docker stop $npm_package_name",
     "install-and-build": "npm install --production && npm run tsc",
     "lint": "tslint 'src/**/*.ts' --config tslint/tslint.yaml",
     "lint-fix": "tslint 'src/**/*.ts' --config tslint/tslint.yaml --fix",

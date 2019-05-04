@@ -4,8 +4,8 @@ This script automates the process of reloading Amazon gift cards with configurab
 
 ## Dependencies
 
-- Node v10.15.3 or newer
-- Chrome or Firefox
+- [Node](https://nodejs.org/)
+- Chrome or Firefox desktop browser
 
 ## Instructions
 
@@ -45,15 +45,19 @@ In the application's directory:
 * Browser is visible to provide peace of mind as to what is happening
 * Configurable/extensible
 
+## Docker
+
+Includes a Docker configuration. To utilize: 
+1. `npm run docker:run`
+2. You then need to VNC into port 5900, open a shell, and execute `npm start`
+
+Ideally we would start our app as soon as we run our Docker image,  removing the need for step 2, but haven't yet been able to get it working - the desktop browsers error out when instantiated. Perhaps they're being instantiated before the desktop interface within the Docker container is ready?
+
 ## TODO
 
 - Implement software testing
 - Create a scheduler of some kind 
 - Try for a more attractive code approach to the code's many webdriver action calls
-
-## Rewrite history
-
-A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version will not receive further updates or support.
 
 ## Acknowledgements
 
@@ -62,3 +66,7 @@ Browser / Site class model inspired by https://github.com/goenning/typescript-se
 ## Similar
 
 https://github.com/rhobot/amazon-reload-balance
+
+## Rewrite history
+
+A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version will not receive further updates or support.

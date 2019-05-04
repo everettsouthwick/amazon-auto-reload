@@ -1,10 +1,8 @@
 FROM selenium/node-chrome-debug
 
-# Works for now to test the build process on a fresh image.
-# Ideally the app would also run in the container, but I haven't yet been able to get
-# the desktop  browsers to instantiate without erroring out.
-
-ENV APPDIR make-purchases
+###############################################################
+# See the #docker section of the README.md for more information
+###############################################################
 
 # Needed for specific apt-get install package(s)
 USER root
@@ -15,6 +13,8 @@ USER root
 RUN apt-get update \
         && apt-get install -y \
                 npm
+
+ENV APPDIR finance-transact
 
 # Cleanup from apt-get
 RUN rm -rf /var/lib/apt/lists/*
@@ -34,4 +34,4 @@ COPY config/default.json ./config/
 # Compile our TypeScript source code files
 RUN npm run tsc
 
-CMD ["npm", "start"]
+ENV VNC_NO_PASSWORD=1
