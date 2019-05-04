@@ -4,7 +4,7 @@
   "description": "Completes transactions for specified amounts for a list of accounts.",
   "main": "dist/index.js",
   "scripts": {
-    "build": "npm run test & npm run tsc",
+    "build": "npm run tsc",
     "docker:build": "cross-conf-env docker image build . -t $npm_package_name",
     "docker:run": "cross-conf-env docker run -d -p 5900:5900 -v /dev/shm:/dev/shm --name $npm_package_name $npm_package_name",
     "docker:forceprune": "npm run docker:stop && cross-conf-env docker container prune --force",
