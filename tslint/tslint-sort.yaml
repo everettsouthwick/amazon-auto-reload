@@ -1,5 +1,6 @@
 rules:
   member-ordering:
+    - true
     -
       alphabetize: true
       order: statics-first

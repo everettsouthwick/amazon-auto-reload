@@ -1,3 +1,7 @@
 {
-    "tslint.configFile": "./tslint/tslint.yaml"
+    "tslint.configFile": "./tslint/tslint.yaml",
+    "javascript.format.placeOpenBraceOnNewLineForControlBlocks": true, 
+    "javascript.format.placeOpenBraceOnNewLineForFunctions": true,
+    "typescript.format.placeOpenBraceOnNewLineForControlBlocks": true,
+    "typescript.format.placeOpenBraceOnNewLineForFunctions": true
 }

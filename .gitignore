@@ -71,3 +71,7 @@ webdriver-browser-profiles/
 
 # App configuration file
 default.json
+
+# Visual Studio files
+/.vs/slnx.sqlite
+/.vs/slnx.sqlite-journal

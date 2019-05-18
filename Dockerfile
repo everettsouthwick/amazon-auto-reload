@@ -7,7 +7,7 @@ FROM selenium/node-chrome-debug
 # Needed for specific apt-get install package(s)
 USER root
 
-# selenium/node-* image does not contain
+# selenium/node-* and raspbian/stretch images do not contain
 #       npm
 # (Verified 2019-05-01)
 RUN apt-get update \
@@ -16,12 +16,12 @@ RUN apt-get update \
 
 ENV APPDIR finance-transact
 
-# Cleanup from apt-get
+# Cleanup from package installation
 RUN rm -rf /var/lib/apt/lists/*
 
 WORKDIR $APPDIR
 
-COPY package*.json ./
+COPY package.json ./
 
 # Install node dependencies
 # (will be cached unless package file is modified)
@@ -29,7 +29,7 @@ RUN npm install --production
 
 COPY src ./src/
 COPY tsconfig.json ./
-COPY config/default.json ./config/
+COPY config/default.json5 ./config/
 
 # Compile our TypeScript source code files
 RUN npm run tsc

@@ -1,6 +1,6 @@
 {
   "name": "finance-transact",
-  "version": "2.1.0",
+  "version": "3.0.0",
   "description": "Completes transactions for specified amounts for a list of accounts.",
   "main": "dist/index.js",
   "scripts": {
@@ -12,32 +12,38 @@
     "install-and-build": "npm install --production && npm run tsc",
     "lint": "tslint 'src/**/*.ts' --config tslint/tslint.yaml",
     "lint-fix": "tslint 'src/**/*.ts' --config tslint/tslint.yaml --fix",
-    "lint-most": "tslint 'src/**/*.ts' --config tslint/tslint-most.yaml",
-    "lint-most-fix": "tslint 'src/**/*.ts' --config tslint/tslint-most.yaml --fix",
     "lint-sort": "tslint 'src/**/*.ts' --config tslint/tslint-sort.yaml",
     "lint-sort-fix": "tslint 'src/**/*.ts' --config tslint/tslint-sort.yaml --fix",
     "start": "node dist/index.js",
     "test": "npm run lint",
-    "tsc": "tsc --project tsconfig.json",
-    "tsc-strict": "tsc --project tsconfig-strict.json"
+    "tsc": "tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@types/chromedriver": "^2.38.0",
-    "@types/config": "0.0.34",
+    "@types/accounting": "^0.4.1",
+    "@types/json5": "0.0.30",
+    "@types/luxon": "^1.13.0",
+    "@types/node": "^12.0.2",
     "@types/selenium-webdriver": "^4.0.0",
+    "@types/table": "^4.0.5",
+    "accounting": "^0.4.1",
+    "chalk": "^2.4.2",
     "chromedriver": "latest",
-    "config": "^3.1.0",
     "geckodriver": "latest",
+    "json5": "^2.1.0",
+    "luxon": "^1.13.2",
     "selenium-webdriver": "3.6",
+    "table": "^5.3.3",
     "typescript": "3.4",
     "winston": "3.2"
   },
   "devDependencies": {
+    "@types/chromedriver": "latest",
     "cross-conf-env": "^1.1.2",
+    "html-to-text": "^5.1.1",
+    "nodemailer": "^6.1.1",
     "tslint": "^5.16.0",
     "tslint-eslint-rules": "^5.4.0"
   },
-  "author": "Everett Southwick",
   "license": "GPL-3.0",
   "keywords": [
     "Amazon",
@@ -47,13 +53,5 @@
     "gift-card",
     "gift-card-balance",
     "selenium"
-  ],
-  "homepage": "https://github.com/everettsouthwick/amazon-auto-reload#readme",
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/everettsouthwick/amazon-auto-reload.git"
-  },
-  "bugs": {
-    "url": "https://github.com/everettsouthwick/amazon-auto-reload/issues"
-  }
+  ]
 }
