@@ -1,2 +1,0 @@
-Decide if https://www.npmjs.com/package/config (currently in place in the app) is the right configuration loading approach for us.
-If yes, modify the app to more fully take advantage of the benefits of it.
