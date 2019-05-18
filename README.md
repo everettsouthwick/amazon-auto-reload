@@ -9,7 +9,7 @@ This script automates the process of reloading Amazon gift card balances with co
 
 ## Getting Started
 1. Clone or download the project
-2. Copy [`config/default-example.json`](config/default-example.json) to `config/default.json` and modify it with your details
+2. Copy [`config/default-example.json5`](config/default-example.json5) to `config/default.json5` and modify it with your details
 3. Execute `npm install && npm run build && npm start`
 
 ## Features
