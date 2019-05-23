@@ -1,43 +1,16 @@
-# amazon-auto-reload
+![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightscreen.svg)
 
-This script automates the process of reloading Amazon gift cards with configurable amounts and transactions per execution. This is useful to maximize credit and/or debit card rewards or to prevent the closure of a credit account due to inactivity.
+This script automates the process of reloading Amazon gift card balances with configurable amounts and transactions per execution. This is useful to maximize credit and/or debit card rewards or to prevent the closure of a credit card account due to inactivity.
 
 ## Dependencies
 
-- Node v10.15.3 or newer
-- Chrome or Firefox
+- [Node.js](https://nodejs.org/)
+- Chrome or Firefox desktop browser installed
 
-## Instructions
-
-In the application's directory:
-1. Copy `config/default-example.json` to `config/default.json` and modify it with your Amazon credentials and the cards you wish to reload
-```json
-{
-    "amazon": {
-        "username": "example@example.com",
-        "password": "myPassword",
-        "reloadDelayInSeconds": 30
-        },
-    "cards": [
-        {
-            "description": "Acme Bank Gold Card",
-            "cardNumber": "4111111111111111",
-            "reloadAmount": 10.00,
-            "enabled": false,
-            "reloadTimes": 1
-        },
-        {
-            "description": "Acme Bank Platinum Card",
-            "cardNumber": "5500000000000004",
-            "reloadAmount": 10.00,
-            "enabled": true,
-            "reloadTimes": 1
-        }
-    ]
-}
-```
-2. From the command line, execute `npm run install-and-build`
-3. From the command line, execute `npm start`
+## Getting Started
+1. Clone or download the project
+2. Copy [`config/default-example.json5`](config/default-example.json5) to `config/default.json5` and modify it with your details
+3. Execute `npm install && npm run build && npm start`
 
 ## Features
 
@@ -45,20 +18,29 @@ In the application's directory:
 * Browser is visible to provide peace of mind as to what is happening
 * Configurable/extensible
 
+## Docker
+
+Includes a Docker configuration. To utilize:
+
+1. Execute `npm run docker:build && npm run docker:run`
+2. You then need to VNC into port 5900, open a shell, and execute `npm start`
+
+Ideally we would start our app as soon as we run our Docker image, removing the need for step 2, but haven't yet been able to make it work - the desktop browsers error out when instantiated. Perhaps they're being instantiated before the desktop interface within the Docker container is ready?
+
 ## TODO
 
-- Implement software testing
-- Create a scheduler of some kind 
+- Add tests
 - Try for a more attractive code approach to the code's many webdriver action calls
-
-## Rewrite history
-
-A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version will not receive further updates or support.
+- Create a scheduler 
 
 ## Acknowledgements
 
-Browser / Site class model inspired by https://github.com/goenning/typescript-selenium-example
+Browser / Site class model inspired by [typescript-selenium-example](/goenning/typescript-selenium-example)
 
 ## Similar
 
-https://github.com/rhobot/amazon-reload-balance
+[amazon-reload-balance](https://github.com/rhobot/amazon-reload-balance)
+
+## Rewrite history
+
+A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version won't receive further updates/support.

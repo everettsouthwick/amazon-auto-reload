@@ -66,5 +66,12 @@ id_rsa
 # Compiled TypeScript files
 dist/
 
+# Webdriver browser profiles for caching, and extension installation if desired by the user
+webdriver-browser-profiles/
+
 # App configuration file
 default.json
+
+# Visual Studio files
+/.vs/slnx.sqlite
+/.vs/slnx.sqlite-journal
