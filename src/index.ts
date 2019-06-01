@@ -1,44 +1,54 @@
+import accounting from "accounting";
 import chalk from "chalk";
 import { readFileSync } from "fs";
+import { Answers, prompt } from "inquirer";
 import { parse } from "json5";
 import { table } from "table";
 
 import { Card } from "./lib/card";
 import { Cards } from "./lib/cards";
-import { logger } from "./lib/logger";
+// import { logger } from "./lib/logger";
 import { Amazon } from "./sites/amazon";
 // import { BankOfAmerica } from "./sites/bankOfAmerica";
 // import { BarclaycardUS } from "./sites/barclaycardUS";
+// import { CapitalOne } from "./sites/capitalOne";
+// import { Discover } from "./sites/discover";
+// import { Mango } from "./sites/mango";
+// import { Mint } from "./sites/mint";
 // import { Optimum } from "./sites/optimum";
+// import { PenFed } from "./sites/penFed";
+// import { USBank } from "./sites/usBank";
 
 // let bankOfAmerica: BankOfAmerica;
 // let barclaycardUS: BarclaycardUS;
+// let discoverPersonal: Discover;
+// let discoverBusiness: Discover;
+// let usBank: USBank;
+// let penFed: PenFed;
+// let capitalOne: CapitalOne;
 
 async function start(): Promise<void>
 {
-	logger.debug("App started");
-
 	const configFilepath: string = "./config/default.json5";
 	const config = parse(readFileSync(configFilepath)
 		.toString());
 
 	const cards: Cards = new Cards(config.cards);
 
-	const completeTransactions: boolean = (config.completeTransactions == undefined) ? true : config.completeTransactions;
+	const completeTransactions: boolean =
+		(config.completeTransactions == undefined) ? true : config.completeTransactions;
+	const confirmBeforePurchases: boolean =
+		(config.confirmBeforePurchases == undefined) ? false : config.confirmBeforePurchases;
 
 	// outputCardTable(cards.enabledCards(), "Before checking for card updates, cards that could be run");
+
+	// const mango: Mango = new Mango(config.mango);
+	// await mango.transferFundsToSecondAccount();
 
 	// for (const card of cards.enabledCards())
 	// {
 	// 	await checkForCreditCardTransactions(card, config);
 	// }
-
-	// bankOfAmerica.browser.driver.close();
-	// barclaycardUS.browser.driver.close();
-
-	// Await discoverCheckCards(cards, config.discoverPersonal);
-	//
-	// await discoverCheckCards(cards, config.discoverBusiness);
 
 	// const premierMembersCreditUnion: PremierMembersCreditUnion =
 	// new PremierMembersCreditUnion(config.premierMembersCreditUnion, completeTransactions);
@@ -55,21 +65,73 @@ async function start(): Promise<void>
 	// 	updateConfigFile(configFilepath, config);
 	// }
 
-	// const mango: Mango = new Mango(config.mango, completeTransactions);
-	// mango.transferFundsToSecondAccount();
 	// const mangoBalanceToTransferOut =
 	// await mango.howMuchToTransferFromSecondAccount();
 
-	outputCardTable(cards.skippedCards(), "Cards that will not be run");
+	// outputCardTable(cards.skippedCards(), "After checking for card updates, cards that will not be run");
 
-	outputCardTable(cards.cardsToRun(), "Ccards that will be run");
+	outputCardTable(cards.cardsToRun(), "Cards that will be run");
+	// const loadSitePromises: Array<Promise<void>> = [];
+	// const mint: Mint = new Mint(config.mint);
+	// loadSitePromises.push(mint.login());
+
+	if (confirmBeforePurchases)
+	{
+		const answers: Answers = await prompt({
+			type: "confirm",
+			name: "makePurchases",
+			message: "Make purchases using the still-enabled cards?",
+		});
+
+		if (!answers.makePurchases)
+		{
+			// closeBrowsers();
+			return;
+		}
+	}
 
 	// const optimum: Optimum = new Optimum(config.optimum, completeTransactions);
 	// await optimum.makePurchases(cards);
 
+	// outputCardTable(cards.cardsToRun(), "After running Optimum, cards that remain to be run");
+
 	const amazon: Amazon = new Amazon(config.amazon, completeTransactions);
 	await amazon.reloadCards(new Cards(cards.cardsToRun()));
+
+	// closeBrowsers();
 }
+
+// async function closeBrowsers(): Promise<void>
+// {
+	// if (bankOfAmerica)
+	// {
+	// 	bankOfAmerica.browser.driver.close();
+	// }
+	// if (barclaycardUS)
+	// {
+	// 	barclaycardUS.browser.driver.close();
+	// }
+	// if (discoverPersonal)
+	// {
+	// 	discoverPersonal.browser.driver.close();
+	// }
+	// if (discoverBusiness)
+	// {
+	// 	discoverBusiness.browser.driver.close();
+	// }
+	// if (usBank)
+	// {
+	// 	usBank.browser.driver.close();
+	// }
+	// if (penFed)
+	// {
+	// 	penFed.browser.driver.close();
+	// }
+	// if (capitalOne)
+	// {
+	// 	capitalOne.browser.driver.close();
+	// }
+// }
 
 function outputCardTable(cards: Card[], tableIntroduction?: string): void
 {
@@ -82,6 +144,7 @@ function outputCardTable(cards: Card[], tableIntroduction?: string): void
 		[
 			chalk.bold("Card"),
 			chalk.bold("Last four"),
+			chalk.bold("Status"),
 			chalk.bold("Closing date"),
 			chalk.bold("Don't use until"),
 			chalk.bold("Transactions found"),
@@ -96,10 +159,11 @@ function outputCardTable(cards: Card[], tableIntroduction?: string): void
 		data.push([
 			color(card.description),
 			color(card.lastFour),
-			color(`${card.closingDateAsString}`),
+			color(card.status()),
+			color(card.closingDateAsString),
 			color(card.dontUseUntilAsString),
 			color(card.transactionsFoundAsString),
-			color(`${card.reloadAmount.toString()}, ${card.reloadTimes.toString()} times`),
+			color(`${accounting.formatMoney(card.reloadAmount)}, ${card.reloadTimes.toString()} times`),
 		]);
 	}
 
@@ -115,14 +179,56 @@ function outputCardTable(cards: Card[], tableIntroduction?: string): void
 // 			bankOfAmerica = new BankOfAmerica(config.bankOfAmerica);
 // 		}
 // 		await bankOfAmerica.checkForCreditCardTransactions(card);
-// 	} else if (card.issuer === "BarclaycardUS")
+// 	}
+// 	else if (card.issuer === "BarclaycardUS")
 // 	{
 // 		if (!barclaycardUS)
 // 		{
 // 			barclaycardUS = new BarclaycardUS(config.barclaycardUS);
 // 		}
 // 		await barclaycardUS.checkForCreditCardTransactions(card);
-// 	} else if (card.issuer)
+// 	}
+// 	else if (card.issuer === "Discover Personal")
+// 	{
+// 		if (!discoverPersonal)
+// 		{
+// 			discoverPersonal = new Discover(config.discoverPersonal);
+// 		}
+// 		await discoverPersonal.checkForCreditCardTransactions(card);
+// 	}
+// 	else if (card.issuer === "Discover Business")
+// 	{
+// 		if (!discoverBusiness)
+// 		{
+// 			discoverBusiness = new Discover(config.discoverBusiness);
+// 		}
+// 		await discoverBusiness.checkForCreditCardTransactions(card);
+// 	}
+// 	else if (card.issuer === "US Bank")
+// 	{
+// 		if (!usBank)
+// 		{
+// 			usBank = new USBank(config.discoverBusiness);
+// 		}
+// 		await usBank.checkForCreditCardTransactions(card);
+// 	}
+// 	else if (card.issuer === "PenFed")
+// 	{
+// 		if (!penFed)
+// 		{
+// 			penFed = new PenFed(config.penFed);
+// 		}
+// 		await penFed.checkForCreditCardTransactions(card);
+// 	}
+// 	else if (card.issuer === "Capital One")
+// 	{
+// 		if (!capitalOne)
+// 		{
+// 			capitalOne = new CapitalOne(config.capitalOne);
+// 		}
+// 		await capitalOne.checkForCreditCardTransactions(card);
+// 	}
+// 	else if (card.issuer)
 // 	{
 // 		logger.warning(`Issuer ${card.issuer} not recognized for ${card.friendlyReference}`);
 // 	}
@@ -164,13 +270,6 @@ function outputCardTable(cards: Card[], tableIntroduction?: string): void
 // function now(): string
 // {
 // 	return DateTime.local().toISO();
-// }
-
-// Async function discoverCheckCards(cards: Card[], login: DiscoverConfig)
-// {
-// 	const discover = new Discover(login);
-//
-// 	await discover.checkCards(cards);
 // }
 
 start();

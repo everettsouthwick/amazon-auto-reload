@@ -1,7 +1,6 @@
 import { formatMoney } from "accounting";
 import { strict as assert } from "assert";
 import { By, Locator, ThenableWebDriver, until, WebElement } from "selenium-webdriver";
-import { URL } from "url";
 
 import { Card } from "../lib/card";
 import { Cards } from "../lib/cards";
@@ -20,10 +19,9 @@ export class Amazon extends Site implements IAmazonConfig
 
 	public constructor(amazonConfig: IAmazonConfig, completeTransactions: boolean)
 	{
-		super(amazonConfig, new URL("https://smile.amazon.com/asv/reload/"));
+		super(amazonConfig, "https://smile.amazon.com/asv/reload/");
 
 		this.completeTransactions = completeTransactions;
-		logger.info(`completeTransactions is set to ${this.completeTransactions}.`);
 
 		this.reloadDelayInSeconds =
 			typeof amazonConfig.reloadDelayInSeconds === "undefined" ? 300 : amazonConfig.reloadDelayInSeconds;
@@ -31,7 +29,6 @@ export class Amazon extends Site implements IAmazonConfig
 
 	public async reloadCards(cards: Cards): Promise<void>
 	{
-		logger.debug("Started Amazon");
 
 		// A driver alias so the code isn't *as* unwieldy
 		const driver: ThenableWebDriver = this.browser.driver;
@@ -140,15 +137,16 @@ export class Amazon extends Site implements IAmazonConfig
 		// A driver alias so the code isn't *as* unwieldy
 		const driver: ThenableWebDriver = this.browser.driver;
 
-		const reloadURL: URL = new URL(`https://smile.amazon.com/asv/reload/order?manualReload.amount=${card.reloadAmount}`);
-		await driver.get(reloadURL.href);
+		const formattedMoney: string = formatMoney(card.reloadAmount, "");
+		const reloadURL: string = `https://smile.amazon.com/asv/reload/order?manualReload.amount=${formattedMoney}`;
+		await driver.get(reloadURL);
 
 		// Enter the reload amount for this card.
 		const reloadAmount: WebElement = await driver.findElement(By.id("asv-manual-reload-amount"));
-		const formattedMoney: string = formatMoney(card.reloadAmount, "");
-		const reloadAmountElementValue = await reloadAmount.getAttribute("value");
+		const reloadAmountElementValue: string = await reloadAmount.getAttribute("value");
 		if (formattedMoney !== reloadAmountElementValue)
 		{
+			await reloadAmount.clear();
 			await reloadAmount.sendKeys(`${card.reloadAmount}`);
 		}
 

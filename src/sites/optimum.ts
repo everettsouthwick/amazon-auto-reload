@@ -27,7 +27,7 @@ export class Optimum extends Site implements IOptimumConfig
 
 	public constructor(optimumConfig: IOptimumConfig, completeTransactions: boolean)
 	{
-		super(optimumConfig, new URL("https://www.optimum.net/login/?referer=%2fpay-bill%2fpayment-options%2f"));
+		super(optimumConfig, "https://www.optimum.net/login/?referer=%2fpay-bill%2fpayment-options%2f");
 
 		this.addressLine1 = optimumConfig.addressLine1;
 		this.city = optimumConfig.city;
@@ -60,7 +60,7 @@ export class Optimum extends Site implements IOptimumConfig
 
 		for (const card of cards.cardsToRun())
 		{
-			while (card.reloadTimes-- > 0)
+			while (card.reloadTimes > 0)
 			{
 				await this.makePurchase(card);
 			}
@@ -82,9 +82,16 @@ export class Optimum extends Site implements IOptimumConfig
 
 		const rememberMe: WebElement = await driver.findElement(By.css(".checkbox:nth-child(3) > .checkbox-inner"));
 
-		if (!await rememberMe.isSelected())
+		if (!(await rememberMe.isSelected()))
 		{
-			await rememberMe.click();
+			try
+			{
+				await rememberMe.click();
+			}
+			catch
+			{
+				// If clicking Remember Me fails, just keep going anyway...
+			}
 		}
 
 		// Sign in
@@ -105,14 +112,17 @@ export class Optimum extends Site implements IOptimumConfig
 		}
 
 		const paymentMethodLocator: Locator = By.css(".payoptions-dropdown .dropdown__knob");
-		await driver.wait(until.elementLocated(paymentMethodLocator))
+		const paymentMethodElement: WebElement = await driver.wait(until.elementLocated(paymentMethodLocator));
+		await driver.wait(until.elementIsVisible(paymentMethodElement))
 			.click();
+
 		try
 		{
 			const cardDropdown: WebElement =
 				await driver.findElement(By.xpath(`//li[contains(.,\'${card.shortDescription}\')]`));
 			await cardDropdown.click();
-		} catch
+		}
+		catch
 		{
 			// If we can't find the card, enter a new card
 			await driver.findElement(By.xpath("//li[contains(.,\'Add credit/debit card\')]"))
@@ -124,15 +134,21 @@ export class Optimum extends Site implements IOptimumConfig
 			// Enter expiration month
 			if (card.expirationMonth !== undefined && card.expirationYear !== undefined)
 			{
+				// Open the month dropdown
+				await driver.findElement(
+					By.xpath("//div[@options='model.monthOptions']//div[contains(concat(' ', @class, ' '), ' dropdown__knob')]"))
+					.click();
+				// Then select the month
 				await driver.findElement(By.xpath(
-					`//form[@id='add_payment_form']/ul/li[3]/ul/li[2]/ul/li[2]/div[2]/div/div/div/div[2]/ul/li[${card.expirationMonth + 1}]`,
+					`//span[.='${String(card.expirationMonth).padStart(2, "0")}']/..`,
 					))
 					.click();
 
-				// Enter expiration year
+				// Open the year dropdown
 				await driver.findElement(
 					By.css(".margin-top-expiration-date-radio > .dropdown--highlight:nth-child(2) .icon-caret-down"))
 					.click();
+				// Enter expiration year
 				await driver.findElement(By.css(
 					`.margin-top-expiration-date-radio > .dropdown--highlight:nth-child(2) .dropdown__option:nth-child(${card.expirationYear - new Date().getFullYear() + 2})`,
 					))
@@ -155,7 +171,6 @@ export class Optimum extends Site implements IOptimumConfig
 				.click();
 			await driver.findElement(By.css(".dropdown__option:nth-child(24) > .ng-binding"))
 				.click();
-
 		}
 
 		const paymentAmount: WebElement = await driver.findElement(By.id("otherAmountInput"));

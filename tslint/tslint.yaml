@@ -9,7 +9,7 @@ rules:
     - tabs
   member-ordering:
     - true
-    - alphabetize: false
+    - alphabetize: true
       order: statics-first
   no-console:
     - true
@@ -31,12 +31,9 @@ rules:
   no-inferrable-types:
     - false
   one-line:
-    - true
-    - check-catch
-    - check-else
-    - check-finally
-    - check-whitespace
+    - false
   only-arrow-functions:
     - true
     - allow-named-functions
-    
+  switch-default:
+    - false
