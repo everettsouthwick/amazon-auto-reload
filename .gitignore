@@ -70,7 +70,7 @@ dist/
 webdriver-browser-profiles/
 
 # App configuration file
-default.json
+config/default.json5
 
 # Visual Studio files
 /.vs/slnx.sqlite

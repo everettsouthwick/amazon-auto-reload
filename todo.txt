@@ -1,0 +1,3 @@
+* Consider json<>class approach like http://choly.ca/post/typescript-json/
+* In browser.ts, pass the URL to the Firefox browser constructor
+* Consider using separate profiles for Firefox, similar to how is already done for Chrome

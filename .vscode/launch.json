@@ -10,11 +10,10 @@
             "name": "Launch Program",
             "program": "${workspaceFolder}\\src\\index.ts",
             "preLaunchTask": "tsc: build - tsconfig.json",
-            "outFiles": [
-                "${workspaceFolder}/dist/**/*.js"
-            ],
-            "outputCapture": "std",
-            "internalConsoleOptions": "openOnSessionStart"
+            "outFiles": ["${workspaceFolder}/dist/**/*.js"],
+            "outputCapture": "std",             // For winston output
+            "console": "integratedTerminal",    // For inquirer support
+            "cwd": "${workspaceFolder}"         // Needed once we set 'console'
         }
     ]
 }
