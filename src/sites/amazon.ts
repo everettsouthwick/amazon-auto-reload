@@ -107,8 +107,7 @@ export class Amazon extends Site implements IAmazonConfig
 
 		await signInToContinueElement.click();
 
-		await driver.wait(until.titleIs("Amazon Sign In"));
-
+		await driver.wait(until.titleIs("Amazon Sign-In"));
 		try
 		{
 			await driver.findElement(By.id("ap_email"))
@@ -118,6 +117,9 @@ export class Amazon extends Site implements IAmazonConfig
 			assert(await driver.findElement(By.css(".a-size-base"))
 				.getText() === this.username);
 		}
+		const continueElement: WebElement = await driver.findElement(By.id("continue"));
+		continueElement.click();
+		await driver.wait(until.elementIsVisible(driver.findElement(By.id("ap_password"))));
 		await driver.findElement(By.id("ap_password"))
 			.sendKeys(this.password);
 
@@ -201,7 +203,7 @@ export class Amazon extends Site implements IAmazonConfig
 			await confirmation.sendKeys(card.cardNumber);
 
 			const confirmationButtons: WebElement[] =
-				await driver.findElements(By.xpath("//button[contains(.,'Confirm Card')]"));
+				await driver.findElements(By.xpath("//button[contains(.,'Verify card')]"));
 			for (const confirmationButton of confirmationButtons)
 			{
 				if (await confirmationButton.isDisplayed())
