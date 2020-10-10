@@ -39,7 +39,8 @@ Browser / Site class model inspired by [typescript-selenium-example](/goenning/t
 
 ## Similar
 
-[amazon-reload-balance](https://github.com/rhobot/amazon-reload-balance)
+- [debbit](https://github.com/jakehilborn/debbit)
+- [amazon-reload-balance](https://github.com/rhobot/amazon-reload-balance)
 
 ## Rewrite history
 
