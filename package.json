@@ -44,7 +44,7 @@
     "@types/inquirer": "^6.0.3",
     "cross-conf-env": "^1.1.2",
     "html-to-text": "^5.1.1",
-    "nodemailer": "^6.4.16",
+    "nodemailer": "^6.6.1",
     "tslint": "^5.17.0",
     "tslint-eslint-rules": "^5.4.0"
   },
