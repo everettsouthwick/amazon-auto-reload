@@ -33,7 +33,7 @@
     "inquirer": "^6.3.1",
     "json5": "^2.2.2",
     "luxon": "^1.28.1",
-    "selenium-webdriver": "3.6",
+    "selenium-webdriver": "4.8",
     "table": "^5.4.0",
     "typescript": "^3.5.1",
     "winston": "3.2"
