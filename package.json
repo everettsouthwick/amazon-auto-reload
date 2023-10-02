@@ -40,7 +40,7 @@
   },
   "devDependencies": {
     "@types/chromedriver": "latest",
-    "@types/hapi__joi": "^15.0.1",
+    "@types/hapi__joi": "^17.0.0",
     "@types/inquirer": "^6.0.3",
     "cross-conf-env": "^1.1.2",
     "html-to-text": "^5.1.1",
