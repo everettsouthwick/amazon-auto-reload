@@ -27,7 +27,7 @@
     "@types/selenium-webdriver": "^4.0.0",
     "@types/table": "^4.0.5",
     "accounting": "^0.4.1",
-    "chalk": "^2.4.2",
+    "chalk": "^5.0.0",
     "chromedriver": "latest",
     "geckodriver": "latest",
     "inquirer": "^6.3.1",
