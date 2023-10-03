@@ -25,7 +25,7 @@
     "@types/luxon": "^3.0.0",
     "@types/node": "^20.0.0",
     "@types/selenium-webdriver": "^4.0.0",
-    "@types/table": "^4.0.5",
+    "@types/table": "^6.0.0",
     "accounting": "^0.4.1",
     "chalk": "^5.0.0",
     "chromedriver": "latest",
@@ -34,7 +34,7 @@
     "json5": "^2.2.2",
     "luxon": "^3.0.0",
     "selenium-webdriver": "4.13",
-    "table": "^5.4.0",
+    "table": "^6.0.0",
     "typescript": "^5.0.0",
     "winston": "3.10"
   },
