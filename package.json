@@ -35,7 +35,7 @@
     "luxon": "^3.0.0",
     "selenium-webdriver": "4.13",
     "table": "^5.4.0",
-    "typescript": "^3.5.1",
+    "typescript": "^5.0.0",
     "winston": "3.10"
   },
   "devDependencies": {
