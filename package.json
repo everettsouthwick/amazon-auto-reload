@@ -36,7 +36,7 @@
     "selenium-webdriver": "4.13",
     "table": "^6.0.0",
     "typescript": "^5.0.0",
-    "winston": "3.10"
+    "winston": "3.11"
   },
   "devDependencies": {
     "@types/chromedriver": "latest",
