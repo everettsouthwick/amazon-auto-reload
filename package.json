@@ -30,7 +30,7 @@
     "chalk": "^5.0.0",
     "chromedriver": "latest",
     "geckodriver": "latest",
-    "inquirer": "^9.0.0",
+    "inquirer": "^11.0.0",
     "json5": "^2.2.2",
     "luxon": "^3.0.0",
     "selenium-webdriver": "4.18",
