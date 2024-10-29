@@ -23,7 +23,7 @@
     "@types/accounting": "^0.4.1",
     "@types/json5": "0.0.30",
     "@types/luxon": "^3.0.0",
-    "@types/node": "^20.0.0",
+    "@types/node": "^22.0.0",
     "@types/selenium-webdriver": "^4.0.0",
     "@types/table": "^6.0.0",
     "accounting": "^0.4.1",
