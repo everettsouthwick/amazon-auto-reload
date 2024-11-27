@@ -1,5 +1,7 @@
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightscreen.svg)
 
+👋 **Check out my AI project [Seren](https://getseren.com)!**
+
 This script automates the process of reloading Amazon gift card balances with configurable amounts and transactions per execution. This is useful to maximize credit and/or debit card rewards or to prevent the closure of a credit card account due to inactivity.
 
 ## Dependencies
