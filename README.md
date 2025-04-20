@@ -1,3 +1,7 @@
+# Amazon Auto Reload
+
+![Image](https://github.com/user-attachments/assets/61ab1216-b6f9-4208-ab8e-7d6973e71e48)
+
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightscreen.svg)
 
 👋 **Check out my AI project [Seren](https://getseren.com)!**
