@@ -51,3 +51,11 @@ Browser / Site class model inspired by [typescript-selenium-example](/goenning/t
 ## Rewrite history
 
 A rewritten version of this app using Typescript was released in 2019-05. A rewritten version of this app using Node.js was released on 2019-04-01. To find the original python version, see the branch [`deprecated-python`](../../tree/deprecated-python). The Python version won't receive further updates/support.
+
+## Built By Me
+
+| Project | Description |
+|---------|-------------|
+| [Go Global Entry](https://www.goglobalentry.com) | Monitor Global Entry enrollment centers for open appointments |
+| [Stepio](https://www.getstep.io) | Free iOS & Android app for step competitions and streaks |
+| [southwick.dev](https://southwick.dev) | Personal site and blog |
