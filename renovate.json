@@ -7,5 +7,6 @@
     ],
     "baseBranches": [
         "develop"
-    ]
+    ],
+    "minimumReleaseAge": "7 days"
 }
