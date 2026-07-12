@@ -19,7 +19,7 @@
     "tsc": "tsc --project tsconfig.json"
   },
   "dependencies": {
-    "@hapi/joi": "^17.0.0",
+    "joi": "^17.0.0",
     "@types/accounting": "^0.4.1",
     "@types/json5": "0.0.30",
     "@types/luxon": "^3.0.0",
